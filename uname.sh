@@ -3,9 +3,12 @@
 if [ ! $# = 2 ] || [ ! -f $1 ] || [ ! -r $1 ] || [[ ! "$1" = *.txt ]]; then
 	exit 1
 else
-	file=$1
-	uname=$2
-	grep "$uname:x:*:*:*:*" $file>abc.txt
+	while read line; do
+		if [[ ! "$line" = *:x:*:*:*:* ]]; then
+			exit 1
+		fi
+	done<$1
+	grep "$2:x:*:*:*:*" $1>abc.txt
 	if [ ! -s abc.txt ]; then
 		echo "Invalid Username"
 		rm -f abc.txt
