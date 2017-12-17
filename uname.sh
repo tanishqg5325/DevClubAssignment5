@@ -8,6 +8,7 @@ else
 	grep "$uname:x:*:*:*:*" $file>abc.txt
 	if [ ! -s abc.txt ]; then
 		echo "Invalid Username"
+		rm -f abc.txt
 		exit 1
 	fi
 	cut -d ":" -f 5 abc.txt
