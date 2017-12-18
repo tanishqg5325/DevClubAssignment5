@@ -10,6 +10,9 @@ else
 		fi
 		num2=$(echo "$line" | cut -d " " -f 1)
 		op=$(echo "$line" | cut -d " " -f 2)
+		if [[ "$num2" = 0 ]] && [[ "$op" = / ]]; then
+			exit 1;
+		fi
 		
 		case "$op" in
 			"+") let num1+=num2;;
