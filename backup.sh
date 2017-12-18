@@ -8,7 +8,7 @@ sync_dir(){
 			sync_dir $1/$file $2/$file
 		fi
 	done
-	ls -1 $2/
+	ls -1R $2/
 	rm -r $2
 }
 
