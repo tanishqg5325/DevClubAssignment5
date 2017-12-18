@@ -1,12 +1,15 @@
 #!/bin/bash
 
 sync_dir(){
-	for file in $(ls $2); do
-		rm -r temp1/$file
+	for file in $(ls $1); do
+		#if [ -d $file ]; then
+			#sync_dir $1/$file $2/$file
+		#elif [ -f $file ]; then
+			rm -r $2/$file
+		#fi
 	done
-	ls -1 temp1/
-	rm -r temp1
-	cp -r final temp1
+	ls -1 $2/
+	rm -r $2
 }
 
 if [ ! $# = 2 ] || [ ! -d $1 ] || [ ! -d $2 ]; then
@@ -20,12 +23,14 @@ else
 	cp -r temp1 final
 
 	echo "Files copied from $1 to $2 are:"
-	sync_dir $1 $2
+	sync_dir $2 $temp/temp1
+
+	cp -r final temp1
 	
 	echo "Files copied from $2 to $1 are:"
-	sync_dir $2 $1
+	sync_dir $1 $temp/temp1
 
-	rm -r $1 $2 temp1
+	rm -r $1 $2
 	cp -r final $1
 	cp -r final $2
 	rm -r final
