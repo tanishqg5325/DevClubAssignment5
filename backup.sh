@@ -2,11 +2,11 @@
 
 sync_dir(){
 	for file in $(ls $1); do
-		#if [ -d $file ]; then
-			#sync_dir $1/$file $2/$file
-		#elif [ -f $file ]; then
+		if [ -f $1/$file ]; then
 			rm -r $2/$file
-		#fi
+		elif [ -d $1/$file ]; then
+			sync_dir $1/$file $2/$file
+		fi
 	done
 	ls -1 $2/
 	rm -r $2
